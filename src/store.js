@@ -43,10 +43,9 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
-    this.id++;
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.id, title: 'Новая запись', selected: false, selectedCount: 0}]
+      list: [...this.state.list, {code: this.#getNewId(), title: 'Новая запись', selected: false, selectedCount: 0}]
     });
   };
 
@@ -81,6 +80,10 @@ class Store {
         return item;
       })
     })
+  }
+  #getNewId() {
+    this.id++;
+    return this.id;
   }
 }
 
