@@ -1,5 +1,10 @@
 .Controls {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 20px;
+}
+
+.button_cart  {
+  width: 80px;
 }
