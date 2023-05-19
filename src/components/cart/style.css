@@ -6,7 +6,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.Cart {
+.cart {
   position: absolute;
   z-index: 1;
   width: 960px;
@@ -37,4 +37,10 @@
   margin-left: 10px;
   min-width: 85px;
   text-align: right;
+}
+
+@media (max-width: 961px) {
+  .Cart {
+    width: 100vw;
+  }
 }
