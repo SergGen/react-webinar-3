@@ -1,0 +1,20 @@
+.background {
+  position: absolute;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.cart {
+  position: absolute;
+  z-index: 1;
+  width: 960px;
+  background: #FFFFFF;
+  min-height: 407px;
+  left: calc(50% - 960px/2);
+  top: calc(50% - 407px/2 + 1px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+}
