@@ -7,16 +7,19 @@ export function Cart({cart, onAction, onClose}) {
   return (
     <>
       <div className={'background'}/>
-      <div className={'cart'}>
+      <div className={'Cart'}>
         <Head title='Корзина'>
           <button className={'button_pointer'} onClick={onClose}>Закрыть</button>
         </Head>
         {cart.length > 0 ?
           <div>
             <List onAction={onAction} list={cart}/>
-            <div><span>Итого</span><span>{formatNumber(calcSum(cart))} &#8381;</span></div>
+            <div className={'total-block'}>
+              <span>Итого</span>
+              <span className={'total-value'}>{formatNumber(calcSum(cart))} &#8381;</span>
+            </div>
           </div>
-           : <p>Корзина пуста</p>}
+           : <p className={'info-empty'}>Корзина пуста</p>}
       </div>
     </>
   );

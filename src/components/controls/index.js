@@ -8,11 +8,15 @@ function Controls({itemsCount, sum, onGo}){
   return (
     <div className='Controls'>
       <div>В корзине: </div>
-      {itemsCount > 0 ?
-        <div>{itemsCount} товар{formatOrdinals(itemsCount)} / {formatNumber(sum)} &#8381;</div> :
-        <span>Пусто</span>
-      }
-      <div><button className='button_cart button_pointer' onClick={() => onGo()}>Перейти</button></div>
+      <div className={'control-info'}>
+        {itemsCount > 0 ?
+          <span>{itemsCount} товар{formatOrdinals(itemsCount)} / {formatNumber(sum)} &#8381;</span> :
+          <span>Пусто</span>
+        }
+      </div>
+      <div>
+        <button className='button_cart button_pointer' onClick={() => onGo()}>Перейти</button>
+      </div>
     </div>
   )
 }

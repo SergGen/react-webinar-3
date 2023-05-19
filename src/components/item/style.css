@@ -11,6 +11,8 @@
 
 .Item-code {
   padding: 20px 10px 20px 20px;
+  display: flex;
+  align-items: center;
 }
 
 .Item-title {
@@ -18,10 +20,18 @@
   padding: 20px 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.Item-quantity {
+  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .Item-actions {
   display: flex;
   justify-content: flex-end;
-  padding: 20px 20px 20px 10px;
+  padding: 20px;
 }

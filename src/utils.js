@@ -12,7 +12,7 @@ export const generateCode = (function (start = 0) {
 }());
 
 export function calcSum(arr) {
-  return arr.reduce((acc, item) => acc + item.price, 0);
+  return arr.reduce((acc, item) => acc + item.price * item.quantity, 0);
 }
 
 export const formatOrdinals = (n) => {
