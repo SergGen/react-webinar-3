@@ -6,7 +6,7 @@
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.cart {
+.Cart {
   position: absolute;
   z-index: 1;
   width: 960px;

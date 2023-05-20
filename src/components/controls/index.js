@@ -10,7 +10,7 @@ function Controls({itemsCount, sum, onGo}){
       <div>В корзине: </div>
       <div className={'control-info'}>
         {itemsCount > 0 ?
-          <span>{itemsCount} товар{formatOrdinals(itemsCount)} / {formatNumber(sum)} &#8381;</span> :
+          <span>{formatNumber(itemsCount)} товар{formatOrdinals(itemsCount)} / {formatNumber(sum)} &#8381;</span> :
           <span>Пусто</span>
         }
       </div>

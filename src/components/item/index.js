@@ -20,7 +20,7 @@ function Item(props){
         <span>{props.item.title}</span>
         <span>{formatNumber(props.item.price)} &#8381;</span>
       </div>
-      {isQuantity && <p className={'Item-quantity'}>{props.item.quantity} шт</p>}
+      {isQuantity && <p className={'Item-quantity'}>{formatNumber(props.item.quantity)} шт</p>}
       <div className='Item-actions'>
         <button className='button_pointer' onClick={callbacks.onAction}>
           {isQuantity ? 'Удалить' : 'Добавить'}
