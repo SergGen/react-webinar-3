@@ -11,10 +11,6 @@ export const generateCode = (function (start = 0) {
   return () => ++start;
 }());
 
-export function calcSum(arr) {
-  return arr.reduce((acc, item) => acc + item.price * item.quantity, 0);
-}
-
 export const formatOrdinals = (n) => {
   const pr = new Intl.PluralRules("ru-RU");
   const suffixes = new Map([

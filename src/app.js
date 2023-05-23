@@ -3,7 +3,6 @@ import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
 import PageLayout from "./components/page-layout";
-import {calcSum} from "./utils";
 import {Cart} from "./components/cart";
 
 /**
@@ -28,12 +27,14 @@ function App({store}) {
   }
 
   return (
-    <PageLayout>
+    <>
       {isCartVisible ? <Cart cart={cart} onAction={callbacks.onRemoveFromCart} onClose={callbacks.onToggleCartVisibility} /> : ""}
-      <Head title='Магазин'/>
-      <Controls itemsCount={cart.length} sum={calcSum(cart)} onGo={callbacks.onToggleCartVisibility}/>
-      <List list={list} onAction={callbacks.onAddToCart} />
-    </PageLayout>
+      <PageLayout>
+        <Head title='Магазин'/>
+        <Controls itemsCount={cart.totalQuantity} sum={cart.sum} onGo={callbacks.onToggleCartVisibility}/>
+        <List list={list} onAction={callbacks.onAddToCart} />
+      </PageLayout>
+    </>
   );
 }
 

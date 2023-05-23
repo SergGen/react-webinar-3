@@ -2,10 +2,10 @@
  * Хранилище состояния приложения
  */
 class Store {
-  constructor(initState = {list: [], cart: []}) {
+  constructor(initState = { list: [], cart: { list: [], totalQuantity: 0, sum: 0 } }) {
     this.state = initState;
     if (!Object.hasOwn(initState, 'cart')) {
-      this.state.cart = [];
+      this.state.cart = { list: [], totalQuantity: 0, sum: 0 };
     }
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -42,9 +42,14 @@ class Store {
   }
 
   removeItemFromCart(code) {
+    const removedItem = this.state.cart.list.find((item) => item.code === code);
     this.#setState({
       ...this.state,
-      cart: [...this.state.cart.filter((item) => item.code !== code)]
+      cart: {
+        list: [...this.state.cart.list.filter((item) => item.code !== code)],
+        totalQuantity: this.state.cart.totalQuantity - 1,
+        sum: this.state.cart.sum - removedItem.price * removedItem.quantity
+      }
     });
   }
 
@@ -54,19 +59,40 @@ class Store {
    */
   addToCart(code) {
     const newItem = this.state.list.find(item => item.code === code);
-    const foundItem = this.state.cart.find((item) => item.code === newItem.code);
+    const foundItem = this.state.cart.list.find((item) => item.code === newItem.code);
+    console.log(this.state.cart);
     if(foundItem) {
       this.#setState({
         ...this.state,
-        cart: [
-          ...this.state.cart.filter((item) => item.code !== newItem.code),
-          {...foundItem, quantity: foundItem.quantity + 1}
-        ]
+        cart: {
+          list: [
+            ...this.state.cart.list.filter((item) => item.code !== newItem.code),
+            {...foundItem, quantity: foundItem.quantity + 1}
+          ],
+          totalQuantity: this.state.cart.totalQuantity,
+          sum: this.state.cart.sum + foundItem.price
+        }
       });
     } else {
-      this.#setState({...this.state, cart: [...this.state.cart, {...newItem, quantity: 1}]});
+      this.#setState({
+        ...this.state,
+        cart: {
+          list: [...this.state.cart.list, {...newItem, quantity: 1}],
+          totalQuantity: this.state.cart.totalQuantity + 1 ,
+          sum: this.state.cart.sum + newItem.price
+          }
+        }
+      );
     }
-  };
+    console.log(this.state.cart);
+  }
+
+  getTotalQuantity() {
+    return this.state.cart.totalQuantity;
+  }
+  getCartSum() {
+    return this.state.cart.sum;
+  }
 }
 
 export default Store;
