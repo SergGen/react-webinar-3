@@ -1,36 +1,21 @@
 import {memo} from "react";
 import PropTypes from 'prop-types';
 import './style.css';
-import '../page-layout/style.css';
-import {formatNumber, formatOrdinals} from "../../utils";
 
-function Controls({itemsCount, sum, onGo}){
+function Controls({onAdd}){
   return (
     <div className='Controls'>
-      <div>В корзине: </div>
-      <div className={'control-info'}>
-        {itemsCount > 0 ?
-          <span>{formatNumber(itemsCount)} товар{formatOrdinals(itemsCount)} / {formatNumber(sum)} &#8381;</span> :
-          <span>Пусто</span>
-        }
-      </div>
-      <div>
-        <button className='button_cart button_pointer' onClick={() => onGo()}>Перейти</button>
-      </div>
+      <button onClick={() => onAdd()}>Добавить</button>
     </div>
   )
 }
 
 Controls.propTypes = {
-  itemsCount: PropTypes.number,
-  sum: PropTypes.number,
-  onGo: PropTypes.func
+  onAdd: PropTypes.func
 };
 
 Controls.defaultProps = {
-  itemsCount: 0,
-  sum: 0,
-  onGo: () => {}
+  onAdd: () => {}
 }
 
 export default memo(Controls);
