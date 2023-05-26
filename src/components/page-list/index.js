@@ -13,7 +13,7 @@ function PageList() {
   const store = useStore();
   useEffect(() => {
     store.actions.catalog.load(currentPage).catch(() => { redirect('/page404'); });
-  }, []);
+  }, [currentPage]);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
