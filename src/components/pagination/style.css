@@ -1,0 +1,18 @@
+.Pagination {
+  padding: 2%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.active {
+  color: white;
+  background-color: #0087E9;
+}
+
+.dots {
+  color: #CCCCCC;
+}
+
+.cell {
+  cursor: pointer;
+}
