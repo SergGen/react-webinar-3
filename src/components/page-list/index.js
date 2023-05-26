@@ -9,7 +9,7 @@ import {redirect, useParams} from "react-router-dom";
 import Pagination from "../pagination";
 
 function PageList() {
-  const currentPage = useParams().currentPage || 1;
+  const currentPage = Number(useParams().currentPage) || 1;
   const store = useStore();
   useEffect(() => {
     store.actions.catalog.load(currentPage).catch(() => { redirect('/page404'); });
