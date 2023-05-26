@@ -8,10 +8,10 @@ function Pagination({currentPage, pageAmount}) {
   const cn = bem('Pagination');
   return (
     <div className={cn()}>
-      <div>
-        <Left pageNumber={1} />
-        <Center currentPage={currentPage} />
-        <Right pageNumber={100}/>
+      <div className={cn('block')}>
+        {currentPage > 2 && <Left currentPage={currentPage} />}
+        <Center currentPage={currentPage} pageAmount={pageAmount} />
+        {pageAmount > currentPage + 1 && <Right currentPage={currentPage} pageNumber={pageAmount}/>}
       </div>
     </div>
   );
