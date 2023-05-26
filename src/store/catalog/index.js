@@ -16,7 +16,7 @@ class Catalog extends StoreModule {
   }
 
   async load(currentPage, perPage = 10) {
-    const skip = perPage * currentPage;
+    const skip = perPage * (currentPage - 1);
     const json = await Api.getCatalog(skip, perPage);
     const pageAmount = Math.ceil(json.result.count / perPage);
       this.setState({
