@@ -11,13 +11,11 @@ import Pagination from "../pagination";
 function PageList() {
   const currentPage = Number(useParams().currentPage) || 1;
   const store = useStore();
-  useEffect(() => {
-    store.actions.catalog.load(currentPage).catch(() => { redirect('/page404'); });
-  }, [currentPage]);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
     pageAmount: state.catalog.pageAmount,
+    perPage: state.catalog.perPage,
     amount: state.basket.amount,
     sum: state.basket.sum,
     head: state.translation.items.head[state.translation.current],
@@ -25,6 +23,10 @@ function PageList() {
     basketTool: state.translation.items.basketTool[state.translation.current],
     current: state.translation.current
   }));
+
+  useEffect(() => {
+    store.actions.catalog.load(currentPage, select.perPage).catch(() => { redirect('/page404'); });
+  }, [currentPage, select.perPage]);
 
   const callbacks = {
     // Добавление в корзину
