@@ -19,25 +19,32 @@ function PageList() {
     list: state.catalog.list,
     pageAmount: state.catalog.pageAmount,
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
+    head: state.translation.items.head[state.translation.current],
+    item: state.translation.items.item[state.translation.current],
+    basketTool: state.translation.items.basketTool[state.translation.current],
+    current: state.translation.current
   }));
+
+  console.log(select.head);
 
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store])
   }
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket]),
+      return <Item translation={select.item} item={item} onAdd={callbacks.addToBasket}/>
+    }, [select.item, callbacks.addToBasket]),
   };
   return (
     <>
-      <Head title='Магазин'/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
+      <Head translation={select.head} current={select.current} onChangeLang={callbacks.changeTranslation}/>
+      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
       {select.pageAmount > 1 && <Pagination currentPage={currentPage} pageAmount={select.pageAmount} />}
     </>

@@ -19,8 +19,8 @@ function Item(props){
         <Link to={`/item/${props.item._id}`}>{props.item.title}</Link>
       </div>
       <div className={cn('actions')}>
-        <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <div className={cn('price')}>{numberFormat(props.item.price, props.translation.pluralKey)} ₽</div>
+        <button onClick={callbacks.onAdd}>{props.translation.add}</button>
       </div>
     </div>
   );

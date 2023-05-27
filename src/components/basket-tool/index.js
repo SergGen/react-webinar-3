@@ -5,20 +5,20 @@ import {cn as bem} from '@bem-react/classname';
 import {numberFormat, plural} from "../../utils";
 import './style.css';
 
-function BasketTool({sum, amount, onOpen}) {
+function BasketTool({translation, sum, amount, onOpen}) {
   const cn = bem('BasketTool');
   return (
     <div className={cn()}>
-      <Link to={'/'}>Главная</Link>
+      <Link to={'/'}>{translation.homeLink}</Link>
       <div>
-        <span className={cn('label')}>В корзине:</span>
+        <span className={cn('label')}>{translation.inBasket}:</span>
         <span className={cn('total')}>
         {amount
-          ? `${amount} ${plural(amount, {one:'товар', few:'товара', many:'товаров'})} / ${numberFormat(sum)} ₽`
-          : `пусто`
+          ? `${amount} ${plural(amount, translation.plural, translation.pluralKey)} / ${numberFormat(sum,translation.pluralKey)} ₽`
+          : translation.empty
         }
       </span>
-        <button onClick={onOpen}>Перейти</button>
+        <button onClick={onOpen}>{translation.basketButton}</button>
       </div>
     </div>
   );

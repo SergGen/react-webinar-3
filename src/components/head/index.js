@@ -1,11 +1,16 @@
 import {memo} from "react";
 import PropTypes from "prop-types";
 import './style.css';
+import Translation from "../translation";
 
-function Head({title}){
+function Head({translation, current, onChangeLang}){
+  const handleOnChangeLang = (lang) => {
+    onChangeLang(lang);
+  }
   return (
     <div className='Head'>
-      <h1>{title}</h1>
+      <h1>{translation.title}</h1>
+      <Translation current={current} onChangeLang={handleOnChangeLang} />
     </div>
   )
 }
