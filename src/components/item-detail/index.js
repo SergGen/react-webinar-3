@@ -1,7 +1,7 @@
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from "../../utils";
 import './style.css';
-function ItemDetail({item, onAdd}) {
+function ItemDetail({translation, item, onAdd}) {
   const cn = bem('ItemDetail');
 
   const callbacks = {
@@ -11,11 +11,11 @@ function ItemDetail({item, onAdd}) {
   return (
     <div className={cn()}>
       <p>{item.description}</p>
-      <p>Страна производитель: <span className={cn('bold')}>{item.madeIn?.title} ({item.madeIn?.code})</span></p>
-      <p>Категория: <span className={cn('bold')}>{item.category?.title}</span></p>
-      <p>Год выпуска: <span className={cn('bold')}>{item.edition}</span></p>
-      <p className={cn('price')}>Цена: {numberFormat(item.price)} ₽</p>
-      <button onClick={callbacks.onAdd}>Добавить</button>
+      <p>{translation.madeIn}: <span className={cn('bold')}>{item.madeIn?.title} ({item.madeIn?.code})</span></p>
+      <p>{translation.category}: <span className={cn('bold')}>{item.category?.title}</span></p>
+      <p>{translation.releaseAt}: <span className={cn('bold')}>{item.edition}</span></p>
+      <p className={cn('price')}>{translation.price}: {numberFormat(item.price, translation.pluralKey)} ₽</p>
+      <button onClick={callbacks.onAdd}>{translation.add}</button>
     </div>
   );
 }

@@ -24,20 +24,24 @@ function PageItem() {
   }, []);
   const select = useSelector(state => ({
     amount: state.basket.amount,
-    sum: state.basket.sum
+    sum: state.basket.sum,
+    basketTool: state.translation.items.basketTool[state.translation.current],
+    item: state.translation.items.item[state.translation.current],
+    current: state.translation.current
   }));
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store])
   }
 
   return (
     <>
-      <Head title={item.title} />
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
-      <ItemDetail item={item} onAdd={callbacks.addToBasket}/>
+      <Head translation={item} current={select.current} onChangeLang={callbacks.changeTranslation}/>
+      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
+      <ItemDetail translation={select.item} item={item} onAdd={callbacks.addToBasket}/>
     </>
   );
 }
