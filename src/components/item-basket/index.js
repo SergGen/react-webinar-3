@@ -11,8 +11,8 @@ function ItemBasket(props) {
   const cn = bem('ItemBasket');
 
   const callbacks = {
-    onRemove: (e) => props.onRemove(props.item._id),
-    onClose: (e) => props.onClose()
+    onRemove: () => props.onRemove(props.item._id),
+    onClose: () => props.onClose()
   };
 
   return (
