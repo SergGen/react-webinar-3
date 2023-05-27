@@ -26,14 +26,12 @@ function PageList() {
     current: state.translation.current
   }));
 
-  console.log(select.head);
-
   const callbacks = {
     // Добавление в корзину
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store.actions.basket]),
     // Открытие модалки корзины
-    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
-    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store])
+    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store.actions.modals]),
+    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store.actions.translation])
   }
 
   const renders = {

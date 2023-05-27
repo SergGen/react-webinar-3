@@ -5,7 +5,7 @@ function ItemDetail({translation, item, onAdd}) {
   const cn = bem('ItemDetail');
 
   const callbacks = {
-    onAdd: (e) => onAdd(item._id)
+    onAdd: () => onAdd(item._id)
   }
 
   return (

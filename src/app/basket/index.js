@@ -20,9 +20,9 @@ function Basket() {
 
   const callbacks = {
     // Удаление из корзины
-    removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store]),
+    removeFromBasket: useCallback(_id => store.actions.basket.removeFromBasket(_id), [store.actions.basket]),
     // Закрытие любой модалки
-    closeModal: useCallback(() => store.actions.modals.close(), [store]),
+    closeModal: useCallback(() => store.actions.modals.close(), [store.actions.modals]),
   }
 
   const {t} = useTranslate();
