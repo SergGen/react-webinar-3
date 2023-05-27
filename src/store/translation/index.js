@@ -70,6 +70,14 @@ class Translation extends StoreModule {
             pluralKey: 'en-EN',
           }
         },
+        pagination: {
+          ru: {
+            perPage: 'Количество товаров на странице'
+          },
+          en: {
+            perPage: 'Number of products per page'
+          }
+        },
         notFound: {
           ru: {
             message: 'Страница не найдена',

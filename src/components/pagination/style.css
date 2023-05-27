@@ -1,7 +1,7 @@
 .Pagination {
   padding: 2%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .Pagination-block {

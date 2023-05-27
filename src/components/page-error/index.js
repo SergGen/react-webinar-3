@@ -6,8 +6,9 @@ import useSelector from "../../store/use-selector";
 function PageError() {
   const select = useSelector(state => ({
     notFound: state.translation.items.notFound[state.translation.current],
+    current: state.translation.current
   }));
-  console.log()
+  console.log(select.current);
   return (
     <div className="PageError">
       <h3>{select.notFound.message}</h3>
