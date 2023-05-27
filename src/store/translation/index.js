@@ -1,6 +1,9 @@
 import StoreModule from "../module";
 
 class Translation extends StoreModule {
+  constructor(store, name) {
+    super(store, name);
+  }
   initState() {
     return {
       current: 'ru',
