@@ -66,6 +66,16 @@ class Translation extends StoreModule {
             pieces: 'pcs',
             pluralKey: 'en-EN',
           }
+        },
+        notFound: {
+          ru: {
+            message: 'Страница не найдена',
+            link: 'На главную страницу',
+          },
+          en: {
+            message: 'Page not found',
+            link: 'To main page',
+          }
         }
       }
     }
