@@ -21,11 +21,14 @@ function PageList() {
     head: state.translation.items.head[state.translation.current],
     item: state.translation.items.item[state.translation.current],
     basketTool: state.translation.items.basketTool[state.translation.current],
+    pagination: state.translation.items.pagination[state.translation.current],
     current: state.translation.current
   }));
 
   useEffect(() => {
-    store.actions.catalog.load(currentPage, select.perPage).catch(() => { redirect('/page404'); });
+    store.actions.catalog.load(currentPage, select.perPage).catch(() => {
+      redirect('/page404');
+    });
   }, [currentPage, select.perPage]);
 
   const callbacks = {
@@ -33,7 +36,8 @@ function PageList() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store.actions.basket]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store.actions.modals]),
-    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store.actions.translation])
+    changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store.actions.translation]),
+    changePerPage: useCallback((newPerPage) => store.actions.catalog.setPerPage(newPerPage), [store])
   }
 
   const renders = {
@@ -44,9 +48,12 @@ function PageList() {
   return (
     <>
       <Head translation={select.head} current={select.current} onChangeLang={callbacks.changeTranslation}/>
-      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum}/>
+      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket} amount={select.amount}
+                  sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
-      {select.pageAmount > 1 && <Pagination currentPage={currentPage} pageAmount={select.pageAmount} />}
+      {select.pageAmount > 1 &&
+        <Pagination onChangePerPage={callbacks.changePerPage} translation={select.pagination} perPage={select.perPage}
+                    currentPage={currentPage} pageAmount={select.pageAmount}/>}
     </>
   );
 }
