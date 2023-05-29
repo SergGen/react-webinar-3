@@ -3,11 +3,11 @@ import PageLayout from "../../components/page-layout";
 import {Route, Routes} from "react-router-dom";
 import PageError from "../../components/page-error";
 import Head from "../../components/head";
-import BasketTool from "../../components/basket-tool";
 import PageList from "../page-list";
 import PageItem from "../page-item";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
+import Menu from "../../components/menu";
 
 function Main() {
   const store = useStore();
@@ -30,8 +30,8 @@ function Main() {
   return (
     <PageLayout>
       <Head translation={headTitle} current={select.current} onChangeLang={callbacks.changeTranslation}/>
-      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket}
-                  amount={select.amount} sum={select.sum}/>
+      <Menu translation={select.basketTool} onOpen={callbacks.openModalBasket}
+            amount={select.amount} sum={select.sum}/>
       <Routes>
         <Route path="/" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
         <Route path="/:currentPage" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
