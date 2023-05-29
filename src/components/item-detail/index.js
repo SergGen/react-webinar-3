@@ -1,8 +1,13 @@
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from "../../utils";
 import './style.css';
-function ItemDetail({translation, item, onAdd}) {
+import {useEffect} from "react";
+function ItemDetail({onChangeHeadTitle, translation, item, onAdd}) {
   const cn = bem('ItemDetail');
+
+  useEffect(() => {
+    onChangeHeadTitle(item.title);
+  } ,[]);
 
   const callbacks = {
     onAdd: () => onAdd(item._id)
@@ -20,5 +25,4 @@ function ItemDetail({translation, item, onAdd}) {
   );
 }
 
-export default ItemDetail
-
+export default ItemDetail;

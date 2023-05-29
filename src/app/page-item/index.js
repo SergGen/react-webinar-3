@@ -5,7 +5,7 @@ import useSelector from "../../store/use-selector";
 import ItemDetail from "../../components/item-detail";
 import Loading from "../../components/Loading";
 
-function PageItem() {
+function PageItem({onChangeHeadTitle}) {
   const { currentItemId} = useParams();
   const store = useStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -28,11 +28,12 @@ function PageItem() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store.actions.basket]),
+    onChangeHeadTitle: useCallback((title) => { onChangeHeadTitle(title); }, [onChangeHeadTitle])
   }
 
   return (
     <>
-      {isLoading ? <Loading/> : <ItemDetail translation={select.itemTranslation} item={select.item} onAdd={callbacks.addToBasket}/>}
+      {isLoading ? <Loading/> : <ItemDetail onChangeHeadTitle={callbacks.onChangeHeadTitle} translation={select.itemTranslation} item={select.item} onAdd={callbacks.addToBasket}/>}
     </>
   );
 }

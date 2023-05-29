@@ -9,7 +9,7 @@ function Head({translation, current, onChangeLang}) {
   }, []);
   return (
     <div className='Head'>
-      <h1>{translation.title}</h1>
+      <h1>{translation}</h1>
       <Translation current={current} onChangeLang={handleOnChangeLang}/>
     </div>
   )

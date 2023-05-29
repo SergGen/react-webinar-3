@@ -1,4 +1,4 @@
-import {memo, useCallback} from 'react';
+import {memo, useCallback, useState} from 'react';
 import PageLayout from "../../components/page-layout";
 import {Route, Routes} from "react-router-dom";
 import PageError from "../../components/page-error";
@@ -11,6 +11,7 @@ import useSelector from "../../store/use-selector";
 
 function Main() {
   const store = useStore();
+  const [headTitle, setHeadTitle] = useState('');
   const select = useSelector(state => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
@@ -24,16 +25,17 @@ function Main() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store.actions.modals]),
     changeTranslation: useCallback((lang) => store.actions.translation.setTranslation(lang), [store.actions.translation]),
+    changeHeadTitle: useCallback((title) => { setHeadTitle(title); }, [headTitle])
   }
   return (
     <PageLayout>
-      <Head translation={select.head} current={select.current} onChangeLang={callbacks.changeTranslation}/>
-      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+      <Head translation={headTitle} current={select.current} onChangeLang={callbacks.changeTranslation}/>
+      <BasketTool translation={select.basketTool} onOpen={callbacks.openModalBasket}
+                  amount={select.amount} sum={select.sum}/>
       <Routes>
-        <Route path="/" element={<PageList />}/>
-        <Route path="/:currentPage" element={<PageList />}/>
-        <Route path="/item/:currentItemId" element={<PageItem />}/>
+        <Route path="/" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
+        <Route path="/:currentPage" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
+        <Route path="/item/:currentItemId" element={<PageItem onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
         <Route path="/*" element={<PageError/>}/>
       </Routes>
     </PageLayout>
