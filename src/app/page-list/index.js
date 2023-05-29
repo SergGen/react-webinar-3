@@ -7,6 +7,7 @@ import {redirect, useParams} from "react-router-dom";
 import Pagination from "../../components/pagination";
 import Loading from "../../components/Loading";
 import {translation} from "../../translation";
+import PropTypes from "prop-types";
 
 function PageList({onChangeHeadTitle, currentLang}) {
   const currentPage = Number(useParams().currentPage) || 1;
@@ -19,7 +20,6 @@ function PageList({onChangeHeadTitle, currentLang}) {
   }));
 
   useEffect(() => {
-    onChangeHeadTitle(translation.head[currentLang].title);
     setIsLoading(true);
     store.actions.catalog.load(currentPage, select.perPage)
       .then(() => {
@@ -29,6 +29,10 @@ function PageList({onChangeHeadTitle, currentLang}) {
         redirect('/page404');
       });
   }, [currentPage, select.perPage]);
+
+  useEffect(() => {
+    onChangeHeadTitle(translation.head[currentLang].title);
+  }, [currentLang]);
 
   const callbacks = {
     // Добавление в корзину
@@ -54,5 +58,10 @@ function PageList({onChangeHeadTitle, currentLang}) {
     </>
   );
 }
+
+PageList.propTypes = {
+  onChangeHeadTitle: PropTypes.func,
+  currentLang: PropTypes.string
+};
 
 export default memo(PageList)
