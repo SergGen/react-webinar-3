@@ -4,12 +4,7 @@ import './style.css';
 function Loading() {
   return (
     <div className="Loading">
-      <div className="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <span className="loader"></span>
     </div>
   );
 }

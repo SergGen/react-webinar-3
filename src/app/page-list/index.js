@@ -1,15 +1,16 @@
-import {memo, useCallback, useEffect} from "react";
+import {memo, useCallback, useEffect, useState} from "react";
 import List from "../../components/list";
 import useSelector from "../../store/use-selector";
 import Item from "../../components/item";
 import useStore from "../../store/use-store";
 import {redirect, useParams} from "react-router-dom";
 import Pagination from "../../components/pagination";
+import Loading from "../../components/Loading";
 
 function PageList() {
   const currentPage = Number(useParams().currentPage) || 1;
   const store = useStore();
-
+  const [isLoading, setIsLoading] = useState(false);
   const select = useSelector(state => ({
     list: state.catalog.list,
     pageAmount: state.catalog.pageAmount,
@@ -19,9 +20,14 @@ function PageList() {
   }));
 
   useEffect(() => {
-    store.actions.catalog.load(currentPage, select.perPage).catch(() => {
-      redirect('/page404');
-    });
+    setIsLoading(true);
+    store.actions.catalog.load(currentPage, select.perPage)
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(() => {
+        redirect('/page404');
+      });
   }, [currentPage, select.perPage]);
 
   const callbacks = {
@@ -38,10 +44,12 @@ function PageList() {
   };
   return (
     <>
-      <List list={select.list} renderItem={renders.item}/>
-      {select.pageAmount > 1 &&
-        <Pagination onChangePerPage={callbacks.changePerPage} translation={select.pagination} perPage={select.perPage}
-                    currentPage={currentPage} pageAmount={select.pageAmount}/>}
+      {isLoading ? <Loading/> : <>
+        <List list={select.list} renderItem={renders.item}/>
+        {select.pageAmount > 1 &&
+          <Pagination onChangePerPage={callbacks.changePerPage} translation={select.pagination} perPage={select.perPage}
+                      currentPage={currentPage} pageAmount={select.pageAmount}/>}
+      </>}
     </>
   );
 }
