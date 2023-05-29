@@ -39,7 +39,7 @@ function PageList() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item translation={select.item} item={item} onAdd={callbacks.addToBasket}/>
+      return <Item link={`/item/${item._id}`} translation={select.item} item={item} onAdd={callbacks.addToBasket}/>
     }, [select.item, callbacks.addToBasket]),
   };
   return (

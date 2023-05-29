@@ -18,7 +18,7 @@ function ItemBasket(props) {
   return (
     <div className={cn()}>
       <div className={cn('title')}>
-        <Link to={`/item/${props.item._id}`} onClick={callbacks.onClose} >{props.item.title}</Link>
+        <Link to={props.link} onClick={callbacks.onClose} >{props.item.title}</Link>
       </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price, props.translation.pluralKey)} ₽</div>
