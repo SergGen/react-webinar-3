@@ -6,13 +6,13 @@ function SelectPerPage({onChangePerPage, translation, perPage}) {
   };
   return (
     <form className="SelectPerPage">
-      <select onChange={handlerSelectPerPage} value={perPage} name="per-page">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="25">25</option>
-        <option value="50">50</option>
-      </select>
-      <span>{translation}</span>
+      {/*<select onChange={handlerSelectPerPage} value={perPage} name="per-page">*/}
+      {/*  <option value="5">5</option>*/}
+      {/*  <option value="10">10</option>*/}
+      {/*  <option value="25">25</option>*/}
+      {/*  <option value="50">50</option>*/}
+      {/*</select>*/}
+      {/*<span>{translation}</span>*/}
     </form>
   );
 }
