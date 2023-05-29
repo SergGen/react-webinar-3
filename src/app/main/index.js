@@ -8,18 +8,15 @@ import PageItem from "../page-item";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Menu from "../../components/menu";
+import {translation} from "../../translation";
 
 function Main() {
   const store = useStore();
-  const [headTitle, setHeadTitle] = useState('');
+  const [headTitle, setHeadTitle] = useState('....');
   const select = useSelector(state => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
-    head: state.translation.items.head[state.translation.current],
-    item: state.translation.items.item[state.translation.current],
-    basketTool: state.translation.items.basketTool[state.translation.current],
-    pagination: state.translation.items.pagination[state.translation.current],
-    current: state.translation.current
+    currentLang: state.translation.currentLang
   }));
   const callbacks = {
     // Открытие модалки корзины
@@ -29,14 +26,14 @@ function Main() {
   }
   return (
     <PageLayout>
-      <Head translation={headTitle} current={select.current} onChangeLang={callbacks.changeTranslation}/>
-      <Menu translation={select.basketTool} onOpen={callbacks.openModalBasket}
+      <Head translation={headTitle} currentLang={select.currentLang} onChangeLang={callbacks.changeTranslation}/>
+      <Menu translation={translation.menu[select.currentLang]} onOpen={callbacks.openModalBasket}
             amount={select.amount} sum={select.sum}/>
       <Routes>
-        <Route path="/" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
-        <Route path="/:currentPage" element={<PageList onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
-        <Route path="/item/:currentItemId" element={<PageItem onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
-        <Route path="/*" element={<PageError/>}/>
+        <Route path="/" element={<PageList currentLang={select.currentLang} onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
+        <Route path="/:currentPage" element={<PageList currentLang={select.currentLang} onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
+        <Route path="/item/:currentItemId" element={<PageItem currentLang={select.currentLang} onChangeHeadTitle={callbacks.changeHeadTitle}/>}/>
+        <Route path="/*" element={<PageError translation={translation.notFound[select.currentLang]}/>}/>
       </Routes>
     </PageLayout>
   );

@@ -6,22 +6,20 @@ import useStore from "../../store/use-store";
 import {redirect, useParams} from "react-router-dom";
 import Pagination from "../../components/pagination";
 import Loading from "../../components/Loading";
+import {translation} from "../../translation";
 
-function PageList({onChangeHeadTitle}) {
+function PageList({onChangeHeadTitle, currentLang}) {
   const currentPage = Number(useParams().currentPage) || 1;
   const store = useStore();
   const [isLoading, setIsLoading] = useState(false);
   const select = useSelector(state => ({
     list: state.catalog.list,
     pageAmount: state.catalog.pageAmount,
-    perPage: state.catalog.perPage,
-    item: state.translation.items.item[state.translation.current],
-    pagination: state.translation.items.pagination[state.translation.current],
+    perPage: state.catalog.perPage
   }));
 
   useEffect(() => {
-    // TODO сделать перевод
-    onChangeHeadTitle('Магазин');
+    onChangeHeadTitle(translation.head[currentLang].title);
     setIsLoading(true);
     store.actions.catalog.load(currentPage, select.perPage)
       .then(() => {
@@ -41,16 +39,17 @@ function PageList({onChangeHeadTitle}) {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item link={`/item/${item._id}`} translation={select.item} item={item} onAdd={callbacks.addToBasket}/>
-    }, [select.item, callbacks.addToBasket]),
+      return <Item link={`/item/${item._id}`} translation={translation.item[currentLang]} item={item}
+                   onAdd={callbacks.addToBasket}/>
+    }, [select.item, callbacks.addToBasket, currentLang]),
   };
   return (
     <>
       {isLoading ? <Loading/> : <>
         <List list={select.list} renderItem={renders.item}/>
         {select.pageAmount > 1 &&
-          <Pagination onChangePerPage={callbacks.changePerPage} translation={select.pagination} perPage={select.perPage}
-                      currentPage={currentPage} pageAmount={select.pageAmount}/>}
+          <Pagination onChangePerPage={callbacks.changePerPage} translation={translation.pagination[currentLang]}
+                      perPage={select.perPage} currentPage={currentPage} pageAmount={select.pageAmount}/>}
       </>}
     </>
   );

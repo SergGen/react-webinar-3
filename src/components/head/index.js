@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import './style.css';
 import Translation from "../translation";
 
-function Head({translation, current, onChangeLang}) {
+function Head({translation, currentLang, onChangeLang}) {
   const handleOnChangeLang = useCallback((lang) => {
     onChangeLang(lang);
   }, []);
   return (
     <div className='Head'>
       <h1>{translation}</h1>
-      <Translation current={current} onChangeLang={handleOnChangeLang}/>
+      <Translation currentLang={currentLang} onChangeLang={handleOnChangeLang}/>
     </div>
   )
 }

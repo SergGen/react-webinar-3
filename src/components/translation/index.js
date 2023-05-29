@@ -1,6 +1,6 @@
 import {memo} from "react";
 
-function Translation({current, onChangeLang}) {
+function Translation({currentLang, onChangeLang}) {
   const handleOnchangeLang = (e) => {
     onChangeLang(e.target.value);
   }
@@ -11,7 +11,7 @@ function Translation({current, onChangeLang}) {
         id="ruChoice"
         name="translation"
         value="ru"
-        checked={current === 'ru'}
+        checked={currentLang === 'ru'}
         onChange={handleOnchangeLang}
       />
       <label htmlFor="ruChoice">Ru</label>
@@ -21,7 +21,7 @@ function Translation({current, onChangeLang}) {
         id="enChoice"
         name="translation"
         value="en"
-        checked={current === 'en'}
+        checked={currentLang === 'en'}
         onChange={handleOnchangeLang}
       />
       <label htmlFor="enChoice">En</label>
