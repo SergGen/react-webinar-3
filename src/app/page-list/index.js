@@ -7,7 +7,7 @@ import {redirect, useParams} from "react-router-dom";
 import Pagination from "../../components/pagination";
 import Loading from "../../components/Loading";
 
-function PageList() {
+function PageList({onChangeHeadTitle}) {
   const currentPage = Number(useParams().currentPage) || 1;
   const store = useStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +20,8 @@ function PageList() {
   }));
 
   useEffect(() => {
+    // TODO сделать перевод
+    onChangeHeadTitle('Магазин');
     setIsLoading(true);
     store.actions.catalog.load(currentPage, select.perPage)
       .then(() => {
