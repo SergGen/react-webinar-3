@@ -16,11 +16,19 @@ function BasketTotal({translation, sum}) {
 }
 
 BasketTotal.propTypes = {
-  sum: PropTypes.number
+  sum: PropTypes.number,
+  translation: PropTypes.shape({
+    total: PropTypes.string.isRequired,
+    pluralKey: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 BasketTotal.defaultProps = {
-  sum: 0
+  sum: 0,
+  translation: {
+    total: 'Итого',
+    pluralKey: 'ru-RU',
+  }
 }
 
 export default memo(BasketTotal);

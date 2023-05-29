@@ -5,6 +5,7 @@ import useSelector from "../../store/use-selector";
 import ItemDetail from "../../components/item-detail";
 import Loading from "../../components/Loading";
 import {translation} from "../../translation";
+import PropTypes from "prop-types";
 function PageItem({onChangeHeadTitle, currentLang}) {
   const { currentItemId} = useParams();
   const store = useStore();
@@ -35,5 +36,8 @@ function PageItem({onChangeHeadTitle, currentLang}) {
   );
 }
 
+PageItem.propTypes = {
+  onChangeHeadTitle: PropTypes.func,
+  currentLang: PropTypes.string
+};
 export default memo(PageItem);
-

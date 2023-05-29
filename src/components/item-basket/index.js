@@ -37,10 +37,22 @@ ItemBasket.propTypes = {
     amount: PropTypes.number
   }).isRequired,
   onRemove: propTypes.func,
+  onClose: propTypes.func,
+  translation: PropTypes.shape({
+    pluralKey: PropTypes.string.isRequired,
+    pieces: PropTypes.string.isRequired,
+    delete: PropTypes.string.isRequired,
+  }).isRequired,
 }
 
 ItemBasket.defaultProps = {
   onRemove: () => {},
+  onClose: () => {},
+  translation: {
+    delete: 'Удалить',
+    pieces: 'шт',
+    pluralKey: 'ru-RU',
+  }
 }
 
 export default memo(ItemBasket);

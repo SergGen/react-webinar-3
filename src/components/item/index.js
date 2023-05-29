@@ -12,7 +12,7 @@ function Item(props){
   const callbacks = {
     onAdd: () => { props.onAdd(props.item._id); }
   }
-  console.log(props.translation);
+
   return (
     <div className={cn()}>
       <div className={cn('title')}>
@@ -32,7 +32,12 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number
   }).isRequired,
-  onAdd: PropTypes.func,
+  onAdd: PropTypes.func.isRequired,
+  link: PropTypes.string.isRequired,
+  translation: PropTypes.shape({
+    pluralKey: PropTypes.string.isRequired,
+    add: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 Item.defaultProps = {

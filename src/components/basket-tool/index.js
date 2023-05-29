@@ -23,14 +23,37 @@ function BasketTool({translation, sum, amount, onOpen}) {
 BasketTool.propTypes = {
   onOpen: PropTypes.func.isRequired,
   sum: PropTypes.number,
-  amount: PropTypes.number
+  amount: PropTypes.number,
+  translation: PropTypes.shape({
+    pluralKey: PropTypes.string.isRequired,
+    plural: PropTypes.oneOfType([
+      PropTypes.shape({
+        one: PropTypes.string.isRequired, few: PropTypes.string.isRequired, many: PropTypes.string.isRequired
+      }).isRequired,
+      PropTypes.shape({
+        one: PropTypes.string.isRequired,
+        two: PropTypes.string.isRequired,
+        few: PropTypes.string.isRequired,
+        many: PropTypes.string.isRequired,
+        other: PropTypes.string.isRequired
+      }).isRequired,
+    ]),
+  }).isRequired,
 };
 
 BasketTool.defaultProps = {
   onOpen: () => {
   },
   sum: 0,
-  amount: 0
+  amount: 0,
+  translation: {
+    homeLink: 'Главная',
+    basketButton: 'Перейти',
+    inBasket: 'В корзине',
+    empty: 'пусто',
+    pluralKey: 'ru-RU',
+    plural: {one: 'товар', few: 'товара', many: 'товаров'}
+  }
 }
 
 export default memo(BasketTool);

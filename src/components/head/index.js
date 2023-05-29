@@ -16,7 +16,9 @@ function Head({translation, currentLang, onChangeLang}) {
 }
 
 Head.propTypes = {
-  title: PropTypes.node,
+  translation: PropTypes.string.isRequired,
+  currentLang: PropTypes.string.isRequired,
+  onChangeLang: PropTypes.func.isRequired
 };
 
 export default memo(Head);
