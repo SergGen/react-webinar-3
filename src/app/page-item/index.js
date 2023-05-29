@@ -4,8 +4,8 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import ItemDetail from "../../components/item-detail";
 import Loading from "../../components/Loading";
-
-function PageItem({onChangeHeadTitle}) {
+import {translation} from "../../translation";
+function PageItem({onChangeHeadTitle, currentLang}) {
   const { currentItemId} = useParams();
   const store = useStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -21,9 +21,6 @@ function PageItem({onChangeHeadTitle}) {
   }, [currentItemId]);
   const select = useSelector(state => ({
     item: state.item.info,
-    basketTool: state.translation.items.basketTool[state.translation.current],
-    itemTranslation: state.translation.items.item[state.translation.current],
-    current: state.translation.current
   }));
   const callbacks = {
     // Добавление в корзину
@@ -33,7 +30,7 @@ function PageItem({onChangeHeadTitle}) {
 
   return (
     <>
-      {isLoading ? <Loading/> : <ItemDetail onChangeHeadTitle={callbacks.onChangeHeadTitle} translation={select.itemTranslation} item={select.item} onAdd={callbacks.addToBasket}/>}
+      {isLoading ? <Loading/> : <ItemDetail onChangeHeadTitle={callbacks.onChangeHeadTitle} translation={translation.item[currentLang]} item={select.item} onAdd={callbacks.addToBasket}/>}
     </>
   );
 }

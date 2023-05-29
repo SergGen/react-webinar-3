@@ -1,18 +1,12 @@
 import {memo} from "react";
 import {Link} from "react-router-dom";
 import './style.css';
-import useSelector from "../../store/use-selector";
 
-function PageError() {
-  const select = useSelector(state => ({
-    notFound: state.translation.items.notFound[state.translation.current],
-    current: state.translation.current
-  }));
-  console.log(select.current);
+function PageError({translation}) {
   return (
     <div className="PageError">
-      <h3>{select.notFound.message}</h3>
-      <Link to="/">{select.notFound.link}</Link>
+      <h3>{translation.message}</h3>
+      <Link to="/">{translation.link}</Link>
     </div>
   );
 }
