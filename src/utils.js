@@ -27,7 +27,6 @@ export function codeGenerator(start = 0) {
 /**
  * Форматирование разрядов числа
  * @param value {Number}
- * @param locale
  * @param options {Object}
  * @returns {String}
  */
