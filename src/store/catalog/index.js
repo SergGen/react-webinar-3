@@ -16,7 +16,9 @@ class CatalogState extends StoreModule {
         page: 1,
         limit: 10,
         sort: 'order',
-        query: ''
+        query: '',
+        // cat
+        category: ''
       },
       count: 0,
       waiting: false
@@ -81,6 +83,8 @@ class CatalogState extends StoreModule {
       skip: (params.page - 1) * params.limit,
       fields: 'items(*),count',
       sort: params.sort,
+      // cat
+      'search[category]': params.category,
       'search[query]': params.query
     };
 
