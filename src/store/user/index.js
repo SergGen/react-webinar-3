@@ -84,7 +84,7 @@ class UserState extends StoreModule {
     if (res.ok) {
       this.setState({
         ...this.initState()
-      }, 'Ошибка логина');
+      }, 'Ошибка выхода');
       localStorage.removeItem('token');
       const data = await res.json();
       console.log(data);

@@ -24,7 +24,7 @@ function LoginDetail({waiting, errorMessage, onLogin, t}) {
 
   return (
     <form onSubmit={handleSubmit} className="LoginDetail">
-      <h3>{t('login-page.title')}</h3>
+      <h2>{t('login-page.title')}</h2>
       <Spinner active={waiting}>
         <label>
           <span>{t('login-page.login')}</span>
