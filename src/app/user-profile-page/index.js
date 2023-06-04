@@ -34,7 +34,7 @@ function UserProfilePage() {
     logout: useCallback(() => {
       store.actions.user.logout();
       navigate('/');
-      }, [store])
+    }, [store])
   }
 
   return (
@@ -43,8 +43,8 @@ function UserProfilePage() {
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>
-      <Navigation />
-      <UserDetail userProfile={select.userProfile} t={t} />
+      <Navigation/>
+      <UserDetail userProfile={select.userProfile} t={t}/>
     </PageLayout>
   );
 }

@@ -5,12 +5,19 @@ import Basket from "./basket";
 import Article from "./article";
 import UserProfile from "./user-profile-page";
 import LoginPage from "./login-page";
+import useStore from "../hooks/use-store";
+import useInit from "../hooks/use-init";
 
 /**
  * Приложение
  * @returns {React.ReactElement}
  */
 function App() {
+  const store = useStore();
+
+  useInit(() => {
+    store.actions.user.checkLoginStatus();
+  }, []);
 
   const activeModal = useSelector(state => state.modals.name);
 

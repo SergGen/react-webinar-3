@@ -8,7 +8,7 @@ function LoginSide({loginStatus, userName, onLogout, t}) {
     onLogout();
   }
   return (
-    <SideLayout side='end'>
+    <SideLayout side='end' border='bottom'>
       {loginStatus ? <>
         <Link to={'/profile'}>{userName}</Link>
         <button onClick={handleLogout} className="buttonLogin">{t('login-side.logout')}</button>

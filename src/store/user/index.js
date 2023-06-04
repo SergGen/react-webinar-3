@@ -11,7 +11,7 @@ class UserState extends StoreModule {
       },
       token: '',
       waiting: false,
-      serverError: '',
+      serverError: [],
       loginStatus: false
     };
   }
@@ -60,9 +60,13 @@ class UserState extends StoreModule {
       localStorage.setItem('token', json.result.token);
       return true;
     } else {
+      let errMsgList = [json.error.message];
+      if (json.error.data && json.error.data.issues && json.error.data.issues[0]) {
+        errMsgList = json.error.data.issues.map((issue) => issue.message);
+      }
       this.setState({
         ...this.getState(),
-        serverError: json.error.message,
+        serverError: [...errMsgList],
         waiting: false
       }, 'Ошибка логина');
       return false;

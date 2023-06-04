@@ -16,6 +16,14 @@ function LoginPage() {
   const {t} = useTranslate();
 
   const navigate = useNavigate();
+
+  const select = useSelector(state => ({
+    serverError: state.user.serverError,
+    waiting: state.user.waiting,
+    loginStatus: state.user.loginStatus,
+    userName: state.user.userProfile.name
+  }));
+
   useInit(() => {
     const preload = async () => {
       if (await store.actions.user.checkLoginStatus()) {
@@ -25,19 +33,12 @@ function LoginPage() {
     preload().catch();
   }, []);
 
-  const select = useSelector(state => ({
-    serverError: state.user.serverError,
-    waiting: state.user.waiting,
-    loginStatus: state.user.loginStatus,
-    userName: state.user.userProfile.name
-  }));
-
   const callbacks = {
     login: useCallback((login, password) => {
       store.actions.user.login(login, password)
         .then((statusOk) => {
           if (statusOk) {
-            navigate('/');
+            navigate(-1);
           }
         });
       }, [store]),

@@ -1,4 +1,4 @@
-import {memo, useCallback, useMemo} from 'react';
+import {memo, useCallback} from 'react';
 import {useParams} from "react-router-dom";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
@@ -20,7 +20,6 @@ function Article() {
 
   useInit(() => {
     store.actions.article.load(params.id);
-    store.actions.user.checkLoginStatus();
   }, [params.id]);
 
   const select = useSelector(state => ({
@@ -40,7 +39,7 @@ function Article() {
 
   return (
     <PageLayout>
-      <LoginSide loginStatus={select.loginStatus} userName={select.userName} onLogout={callbacks.logout}/>
+      <LoginSide loginStatus={select.loginStatus} userName={select.userName} onLogout={callbacks.logout} t={t}/>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>
@@ -53,3 +52,5 @@ function Article() {
 }
 
 export default memo(Article);
+
+//Минимум это Incorrect data из поля errors, но лучше вытащить все тексты из issues. Вообще они там распределяются по названиям полей в path. Специфически, но всё же. Если в path ничего нет, значит это общая ошибка, не относится к какому-то полю. В форме вроде только такая и есть.

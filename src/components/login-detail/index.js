@@ -34,7 +34,7 @@ function LoginDetail({waiting, errorMessage, onLogin, t}) {
           <span>{t('login-page.password')}</span>
           <input value={password} onChange={handlePassword} name="password" type="password"/>
         </label>
-        {errorMessage !== '' && <p className="error">{errorMessage}</p>}
+        {errorMessage.length > 0 && errorMessage.map((error, idx) => <p key={idx} className="error">{error}</p>)}
         <button disabled={disableButton()} type="submit">{t('login-page.button')}</button>
       </Spinner>
     </form>

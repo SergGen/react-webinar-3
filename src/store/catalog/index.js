@@ -1,5 +1,4 @@
 import StoreModule from "../module";
-import {parseCategoryList} from "../../utils";
 
 /**
  * Состояние каталога - параметры фильтра исписок товара
@@ -20,7 +19,6 @@ class CatalogState extends StoreModule {
         query: '',
         category: ''
       },
-      categoryList: [],
       count: 0,
       waiting: false
     }
@@ -33,31 +31,14 @@ class CatalogState extends StoreModule {
    * @return {Promise<void>}
    */
   async initParams(newParams = {}) {
-    await this.getCategoryList();
     const urlParams = new URLSearchParams(window.location.search);
     let validParams = {};
     if (urlParams.has('page')) validParams.page = Number(urlParams.get('page')) || 1;
     if (urlParams.has('limit')) validParams.limit = Math.min(Number(urlParams.get('limit')) || 10, 50);
     if (urlParams.has('sort')) validParams.sort = urlParams.get('sort');
     if (urlParams.has('query')) validParams.query = urlParams.get('query');
+    if (urlParams.has('category')) validParams.category = urlParams.get('category');
     await this.setParams({...this.initState().params, ...validParams, ...newParams}, true);
-  }
-
-  async getCategoryList(){
-    try {
-      const res = await fetch('/api/v1/categories?fields=_id,title,parent(_id)&limit=*');
-      const json = await res.json();
-      this.setCategoryList(json.result.items);
-    } catch (err) {
-      this.setCategoryList([]);
-    }
-  }
-
-  setCategoryList(categoryList = []) {
-    this.setState({
-      ...this.getState(),
-      categoryList: [{value: '', title: 'Все'}, ...parseCategoryList(categoryList)]
-    }, 'Добавление категорий каталога');
   }
 
   /**

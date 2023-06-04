@@ -14,7 +14,8 @@ class Store {
      * modals: ModalsState,
      * article: ArticleState,
      * locale: LocaleState,
-     * user: UserState
+     * user: UserState,
+     * category: CategoryState
      * }} */
     this.actions = {};
     for (const name of Object.keys(modules)) {
@@ -44,7 +45,8 @@ class Store {
    * modals: Object,
    * article: Object,
    * locale: Object,
-   * user: Object
+   * user: Object,
+   * category: Object
    * }}
    */
   getState() {
@@ -54,6 +56,7 @@ class Store {
   /**
    * Установка состояния
    * @param newState {Object}
+   * @param description
    */
   setState(newState, description = 'setState') {
     console.group(

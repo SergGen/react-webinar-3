@@ -17,7 +17,7 @@ function Main() {
 
   useInit(() => {
     store.actions.catalog.initParams();
-    store.actions.user.checkLoginStatus();
+    store.actions.category.getCategoryList();
   }, [], true);
 
   const select = useSelector(state => ({
