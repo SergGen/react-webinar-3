@@ -10,6 +10,7 @@ import Navigation from "../../containers/navigation";
 import Spinner from "../../components/spinner";
 import ArticleCard from "../../components/article-card";
 import LocaleSelect from "../../containers/locale-select";
+import LoginSide from "../../components/login-side";
 
 function Article() {
   const store = useStore();
@@ -19,11 +20,14 @@ function Article() {
 
   useInit(() => {
     store.actions.article.load(params.id);
+    store.actions.user.checkLoginStatus();
   }, [params.id]);
 
   const select = useSelector(state => ({
     article: state.article.data,
     waiting: state.article.waiting,
+    loginStatus: state.user.loginStatus,
+    userName: state.user.userProfile.name
   }));
 
   const {t} = useTranslate();
@@ -31,10 +35,12 @@ function Article() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    logout: useCallback(() => store.actions.user.logout(), [store])
   }
 
   return (
     <PageLayout>
+      <LoginSide loginStatus={select.loginStatus} userName={select.userName} onLogout={callbacks.logout}/>
       <Head title={select.article.title}>
         <LocaleSelect/>
       </Head>

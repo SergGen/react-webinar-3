@@ -1,9 +1,10 @@
-import {useCallback, useContext, useEffect, useState} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import useSelector from "../hooks/use-selector";
 import Main from "./main";
 import Basket from "./basket";
 import Article from "./article";
+import UserProfile from "./user-profile-page";
+import LoginPage from "./login-page";
 
 /**
  * Приложение
@@ -16,8 +17,10 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={''} element={<Main/>}/>
+        <Route path={'/'} element={<Main/>}/>
         <Route path={'/articles/:id'} element={<Article/>}/>
+        <Route path={'/profile'} element={<UserProfile />}/>
+        <Route path={'/login'} element={<LoginPage />}/>
       </Routes>
 
       {activeModal === 'basket' && <Basket/>}
