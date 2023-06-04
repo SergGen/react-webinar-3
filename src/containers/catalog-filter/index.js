@@ -28,19 +28,6 @@ function CatalogFilter() {
   };
 
   const options = {
-    // category: useMemo(() => ([
-    //   {value: '', title: 'Все'},
-    //   {value: '6477698510d1060c910cbb59', title: 'Электроника'},
-    //   {value: '6477698510d1060c910cbb5a', title: '- Телефоны'},
-    //   {value: '6477698510d1060c910cbb61', title: '- - Смартфоны'},
-    //   {value: '6477698510d1060c910cbb62', title: '- - Аксесуары'},
-    //   {value: '6477698510d1060c910cbb5b', title: '- Ноутбуки'},
-    //   {value: '6477698510d1060c910cbb5c', title: '- Телевизоры'},
-    //   {value: '6477698510d1060c910cbb5d', title: 'Книги'},
-    //   {value: '6477698510d1060c910cbb5e', title: '- Учебники'},
-    //   {value: '6477698510d1060c910cbb5f', title: '- Художественная'},
-    //   {value: '6477698510d1060c910cbb60', title: '- Комиксы'},
-    // ]), []),
     sort: useMemo(() => ([
       {value: 'order', title: 'По порядку'},
       {value: 'title.ru', title: 'По именованию'},
